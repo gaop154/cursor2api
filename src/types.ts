@@ -113,6 +113,7 @@ export interface AppConfig {
     port: number;
     timeout: number;
     proxy?: string;
+    authToken?: string;
     cursorModel: string;
     enableThinking?: boolean;
     vision?: {

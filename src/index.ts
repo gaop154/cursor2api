@@ -35,6 +35,21 @@ app.use((_req, res, next) => {
     next();
 });
 
+// ==================== 鉴权中间件 ====================
+
+app.use((req, res, next) => {
+    if (!config.authToken) return next();
+    // 跳过不需要鉴权的端点
+    if (req.method === 'GET' || req.path === '/health') return next();
+    const auth = req.headers['authorization'];
+    const token = auth?.startsWith('Bearer ') ? auth.slice(7) : auth;
+    if (token !== config.authToken) {
+        res.status(401).json({ error: { type: 'authentication_error', message: 'Invalid auth token' } });
+        return;
+    }
+    next();
+});
+
 // ==================== 路由 ====================
 
 // Anthropic Messages API

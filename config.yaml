@@ -6,6 +6,12 @@ port: 3010
 # 请求超时（秒）
 timeout: 120
 
+# 访问鉴权 Token（可选）
+# 配置后，所有 POST 请求必须携带 Authorization: Bearer <token> 请求头
+# 不配置则不开启鉴权
+# 环境变量等效: AUTH_TOKEN=your-secret-token
+auth_token: dfdahuhfsjj1
+
 # 代理设置（可选）
 # ⚠️ Node.js fetch 不读取 HTTP_PROXY / HTTPS_PROXY 环境变量，
 #    必须在此处或通过 PROXY 环境变量显式配置代理。
